@@ -1,0 +1,1 @@
+CUDA_SAMPLES_INCLUDE_DIR=~/cuda-samples/Common pip install .
