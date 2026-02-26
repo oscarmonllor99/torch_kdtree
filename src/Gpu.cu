@@ -747,7 +747,7 @@ __global__ void cuVerifyKdTree(const KdNode kdNodes[], const KdCoord coord[], si
 		// Reduce final warp using shuffle
 		for (sint offset = warpSize/2; offset > 0; offset /= 2)
 		{
-			myCount += __shfl_down(myCount, offset);
+			myCount += __shfl_down_sync(0xffffffff, myCount, offset);
 		}
 	}
 	if (tid == 0)
@@ -792,7 +792,7 @@ __global__ void blockReduce(sint g_sums[], sint N) {
 		// Reduce final warp using shuffle
 		for (sint offset = warpSize/2; offset > 0; offset /= 2)
 		{
-			mySum += __shfl_down(mySum, offset);
+			mySum += __shfl_down_sync(0xffffffff, mySum, offset);
 		}
 	}
 	if (tid == 0)
